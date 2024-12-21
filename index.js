@@ -1,5 +1,6 @@
 import { configDotenv } from 'dotenv';
 import Express from 'express';
+import cors from 'cors'; // Import cors
 import predictionController from './src/controllers/prediction.js';
 import multerUpload from './src/helpers/multer.js';
 import { createResponse } from './src/helpers/response.js';
@@ -9,6 +10,8 @@ import crypto from "crypto";
 configDotenv();
 
 const app = Express();
+
+app.use(cors());
 
 app.get('/', (req, res) => {
     res.send('Hello World');
@@ -50,15 +53,14 @@ app.post('/test/firestore', async (req, res) => {
     const id = crypto.randomUUID();
 
     try {
-
         await storeData(id, {
             test: 'data'
-        })
+        });
         return createResponse.success({
             res,
             data: "oii",
             message: "PPPP"
-        })
+        });
     } catch (error) {
         console.log(error);
         createResponse.error(
@@ -66,10 +68,9 @@ app.post('/test/firestore', async (req, res) => {
                 res,
                 message: "error : " + error
             }
-        )
+        );
     }
-
-})
+});
 
 app.get('/predict/histories', predictionController.getHistory);
 
