@@ -17,6 +17,7 @@ async function storeData(id, data) {
     if (!id) {
         return { success: false, error: "ID is required" };
     }
+
     try {
         await predictionsCollection.doc(id).set(data);
         return { success: true };
@@ -38,8 +39,8 @@ async function getHistory() {
                     result: data.result,
                     createdAt: data.createdAt,
                     suggestion: data.suggestion,
-                    createdAt: data.createdAt, 
-                    id: doc.id
+                    createdAt: data.createdAt,
+                    id: data.id
                 }
             };
         });
