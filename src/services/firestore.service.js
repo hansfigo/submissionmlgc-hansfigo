@@ -38,7 +38,7 @@ async function getHistory() {
                     result: data.result,
                     createdAt: data.createdAt,
                     suggestion: data.suggestion,
-                    createdAt: doc.createTime.toDate().toISOString(), 
+                    createdAt: data.createdAt, 
                     id: doc.id
                 }
             };

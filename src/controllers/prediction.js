@@ -28,6 +28,7 @@ const predictionController = {
         }
 
         const id = crypto.randomUUID();
+        const createdAt = new Date().toISOString();
 
         try {
             const predictions = await predictImage(model, image);
@@ -36,6 +37,7 @@ const predictionController = {
                 resultScore: predictions.resultScore,
                 result: predictions.result,
                 suggestion: predictions.suggestion,
+                createdAt
             })
 
             createResponse.success({
